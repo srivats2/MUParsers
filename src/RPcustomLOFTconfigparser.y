@@ -1,3 +1,4 @@
+%define api.prefix{MUConfig}
 %{
 #include<cstdio>
 #include<iostream>
@@ -9,6 +10,7 @@
 //in general though, you would be able to use the keyvalue struct to do any generic thing and thats why I have templated it...is this the best way? I doubt it...
 #include "keyvaluepair.hxx"
 // stuff from flex that bison needs to know about:
+
 extern "C" int yylex();
 extern "C" int yyparse();
 extern int lineno;
@@ -38,6 +40,7 @@ void yyerror(const char *s);
 extern "C" int MUconfig_parse(char*);
 extern "C" void MUconfig_parser_help(void);
 extern "C" void MUconfig_parser_version(void);
+
 %}
 
 
@@ -243,6 +246,5 @@ void yyerror(const char *s) {
         std::cout<< "Line #"<<lineno<<" in the cfg file does not match any known grammar"<<std::endl;
         exit(-1);
  }
-
 
 
