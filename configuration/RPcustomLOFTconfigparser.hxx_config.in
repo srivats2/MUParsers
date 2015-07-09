@@ -30,20 +30,28 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
-# define YY_YY_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
+#ifndef YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
+# define YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
 /* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
+#ifndef MUCONFIGDEBUG
+# if defined YYDEBUG
 #if YYDEBUG
-extern int yydebug;
+#   define MUCONFIGDEBUG 1
+#  else
+#   define MUCONFIGDEBUG 0
+#  endif
+# else /* ! defined YYDEBUG */
+#  define MUCONFIGDEBUG 0
+# endif /* ! defined YYDEBUG */
+#endif  /* ! defined MUCONFIGDEBUG */
+#if MUCONFIGDEBUG
+extern int MUConfigdebug;
 #endif
 
 /* Token type.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
+#ifndef MUCONFIGTOKENTYPE
+# define MUCONFIGTOKENTYPE
+  enum MUConfigtokentype
   {
     COMMENT = 258,
     LOFT = 259,
@@ -62,27 +70,27 @@ extern int yydebug;
 #endif
 
 /* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+#if ! defined MUCONFIGSTYPE && ! defined MUCONFIGSTYPE_IS_DECLARED
 
-union YYSTYPE
+union MUCONFIGSTYPE
 {
-#line 52 "RPcustomLOFTconfigparser.y" /* yacc.c:1909  */
+#line 55 "RPcustomLOFTconfigparser.y" /* yacc.c:1909  */
 
         int ival;
         float fval;
         char *sval;
 
-#line 76 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.hxx" /* yacc.c:1909  */
+#line 84 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.hxx" /* yacc.c:1909  */
 };
 
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
+typedef union MUCONFIGSTYPE MUCONFIGSTYPE;
+# define MUCONFIGSTYPE_IS_TRIVIAL 1
+# define MUCONFIGSTYPE_IS_DECLARED 1
 #endif
 
 
-extern YYSTYPE yylval;
+extern MUCONFIGSTYPE MUConfiglval;
 
-int yyparse (void);
+int MUConfigparse (void);
 
-#endif /* !YY_YY_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED  */
+#endif /* !YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED  */

@@ -58,11 +58,20 @@
 /* Pull parsers.  */
 #define YYPULL 1
 
+/* Substitute the type names.  */
+#define YYSTYPE         MUCONFIGSTYPE
+/* Substitute the variable and function names.  */
+#define yyparse         MUConfigparse
+#define yylex           MUConfiglex
+#define yyerror         MUConfigerror
+#define yydebug         MUConfigdebug
+#define yynerrs         MUConfignerrs
 
-
+#define yylval          MUConfiglval
+#define yychar          MUConfigchar
 
 /* Copy the first part of user declarations.  */
-#line 1 "RPcustomLOFTconfigparser.y" /* yacc.c:339  */
+#line 2 "RPcustomLOFTconfigparser.y" /* yacc.c:339  */
 
 #include<cstdio>
 #include<iostream>
@@ -74,6 +83,7 @@
 //in general though, you would be able to use the keyvalue struct to do any generic thing and thats why I have templated it...is this the best way? I doubt it...
 #include "keyvaluepair.hxx"
 // stuff from flex that bison needs to know about:
+
 extern "C" int yylex();
 extern "C" int yyparse();
 extern int lineno;
@@ -104,7 +114,8 @@ extern "C" int MUconfig_parse(char*);
 extern "C" void MUconfig_parser_help(void);
 extern "C" void MUconfig_parser_version(void);
 
-#line 108 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:339  */
+
+#line 119 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -124,20 +135,28 @@ extern "C" void MUconfig_parser_version(void);
 
 /* In a future release of Bison, this section will be replaced
    by #include "RPcustomLOFTconfigparser.hxx".  */
-#ifndef YY_YY_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
-# define YY_YY_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
+#ifndef YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
+# define YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
 /* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
+#ifndef MUCONFIGDEBUG
+# if defined YYDEBUG
 #if YYDEBUG
-extern int yydebug;
+#   define MUCONFIGDEBUG 1
+#  else
+#   define MUCONFIGDEBUG 0
+#  endif
+# else /* ! defined YYDEBUG */
+#  define MUCONFIGDEBUG 0
+# endif /* ! defined YYDEBUG */
+#endif  /* ! defined MUCONFIGDEBUG */
+#if MUCONFIGDEBUG
+extern int MUConfigdebug;
 #endif
 
 /* Token type.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
+#ifndef MUCONFIGTOKENTYPE
+# define MUCONFIGTOKENTYPE
+  enum MUConfigtokentype
   {
     COMMENT = 258,
     LOFT = 259,
@@ -156,34 +175,34 @@ extern int yydebug;
 #endif
 
 /* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+#if ! defined MUCONFIGSTYPE && ! defined MUCONFIGSTYPE_IS_DECLARED
 
-union YYSTYPE
+union MUCONFIGSTYPE
 {
-#line 52 "RPcustomLOFTconfigparser.y" /* yacc.c:355  */
+#line 55 "RPcustomLOFTconfigparser.y" /* yacc.c:355  */
 
         int ival;
         float fval;
         char *sval;
 
-#line 170 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:355  */
+#line 189 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:355  */
 };
 
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
+typedef union MUCONFIGSTYPE MUCONFIGSTYPE;
+# define MUCONFIGSTYPE_IS_TRIVIAL 1
+# define MUCONFIGSTYPE_IS_DECLARED 1
 #endif
 
 
-extern YYSTYPE yylval;
+extern MUCONFIGSTYPE MUConfiglval;
 
-int yyparse (void);
+int MUConfigparse (void);
 
-#endif /* !YY_YY_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED  */
+#endif /* !YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 187 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:358  */
+#line 206 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -364,7 +383,7 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
-         || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
+         || (defined MUCONFIGSTYPE_IS_TRIVIAL && MUCONFIGSTYPE_IS_TRIVIAL)))
 
 /* A type that is properly aligned for any stack member.  */
 union yyalloc
@@ -478,18 +497,18 @@ static const yytype_uint8 yytranslate[] =
       15
 };
 
-#if YYDEBUG
+#if MUCONFIGDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    89,    89,    90,    94,    95,    96,   101,   106,   109,
-     110,   113,   114,   119,   127,   137,   140,   144,   147,   150,
-     153,   156,   157,   160,   161,   166,   177,   180,   181,   184,
-     191,   195,   196,   199,   203
+       0,    92,    92,    93,    97,    98,    99,   104,   109,   112,
+     113,   116,   117,   122,   130,   140,   143,   147,   150,   153,
+     156,   159,   160,   163,   164,   169,   180,   183,   184,   187,
+     194,   198,   199,   202,   206
 };
 #endif
 
-#if YYDEBUG || YYERROR_VERBOSE || 0
+#if MUCONFIGDEBUG || YYERROR_VERBOSE || 0
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
@@ -653,7 +672,7 @@ while (0)
 
 
 /* Enable debugging if requested.  */
-#if YYDEBUG
+#if MUCONFIGDEBUG
 
 # ifndef YYFPRINTF
 #  include <stdio.h> /* INFRINGES ON USER NAME SPACE */
@@ -774,12 +793,12 @@ do {                                    \
 /* Nonzero means print parse trace.  It is left uninitialized so that
    multiple parsers can coexist.  */
 int yydebug;
-#else /* !YYDEBUG */
+#else /* !MUCONFIGDEBUG */
 # define YYDPRINTF(Args)
 # define YY_SYMBOL_PRINT(Title, Type, Value, Location)
 # define YY_STACK_PRINT(Bottom, Top)
 # define YY_REDUCE_PRINT(Rule)
-#endif /* !YYDEBUG */
+#endif /* !MUCONFIGDEBUG */
 
 
 /* YYINITDEPTH -- initial size of the parser's stacks.  */
@@ -1290,23 +1309,23 @@ yyreduce:
   switch (yyn)
     {
         case 11:
-#line 113 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 116 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {;}
-#line 1296 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1315 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 114 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 117 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {MUTracker_param_list_numbers= new keyvaluePair<float>;
     MUTracker_param_list_numbers->key = MUTracker_temp_string;
     MUTracker_param_list_numbers->value=(yyvsp[-1].fval);
     MUTracker_list_number_params.push_back(MUTracker_param_list_numbers);
     }
-#line 1306 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1325 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 119 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 122 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {MUTracker_param_list_strings=new keyvaluePair<std::string>;
     MUTracker_param_list_strings->key = MUTracker_temp_string;
     std::string remove_annoying_characters_MUTracker = (yyvsp[0].sval);
@@ -1315,61 +1334,61 @@ yyreduce:
     MUTracker_param_list_strings->value= remove_annoying_characters_MUTracker;
     MUTracker_list_string_params.push_back(MUTracker_param_list_strings);
     }
-#line 1319 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1338 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 127 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 130 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {MUTracker_param_list_strings=new keyvaluePair<std::string>;
     MUTracker_param_list_strings->key = MUTracker_temp_string;
     MUTracker_param_list_strings->value = (yyvsp[-1].sval);
     MUTracker_list_string_params.push_back(MUTracker_param_list_strings);
     }
-#line 1329 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1348 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 137 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 140 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {std::cout<<"FOUND MUTracker START"<<std::endl;}
-#line 1335 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1354 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 140 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 143 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {std::cout<<"FOUND MUTracker END"<<std::endl;}
-#line 1341 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1360 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 147 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 150 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {;}
-#line 1347 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1366 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 150 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 153 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {;}
-#line 1353 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1372 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 160 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 163 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {;}
-#line 1359 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1378 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 161 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 164 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {loft_param_list_numbers= new keyvaluePair<float>;
     loft_param_list_numbers->key = loft_temp_string;
     loft_param_list_numbers->value=(yyvsp[-1].fval);
     loft_list_number_params.push_back(loft_param_list_numbers);
     }
-#line 1369 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1388 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 166 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 169 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {loft_param_list_strings=new keyvaluePair<std::string>;
     loft_param_list_strings->key = loft_temp_string;
     std::string remove_annoying_characters_loft = (yyvsp[0].sval);
@@ -1378,26 +1397,26 @@ yyreduce:
     loft_param_list_strings->value= remove_annoying_characters_loft;
     loft_list_string_params.push_back(loft_param_list_strings);
     }
-#line 1382 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1401 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 184 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 187 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {char* param;
     param = (char *)malloc(std::strlen(loft_temp_string.c_str())+1+std::strlen((yyvsp[0].sval)));
     std::strcpy(param, loft_temp_string.c_str());
     std::strcat(param, (yyvsp[0].sval)); loft_temp_string = param; MUTracker_temp_string=param;}
-#line 1391 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1410 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 203 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
+#line 206 "RPcustomLOFTconfigparser.y" /* yacc.c:1646  */
     {loft_temp_string.clear(); MUTracker_temp_string.clear();}
-#line 1397 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1416 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
     break;
 
 
-#line 1401 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
+#line 1420 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.cxx" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1625,7 +1644,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 205 "RPcustomLOFTconfigparser.y" /* yacc.c:1906  */
+#line 208 "RPcustomLOFTconfigparser.y" /* yacc.c:1906  */
 
 void MUconfig_parser_help(void){
 std::cout<<"MU Config Parser is used to parse University of Missouri's tracker config files such as for LOFT & CSURF"<<std::endl;
@@ -1667,6 +1686,5 @@ void yyerror(const char *s) {
         std::cout<< "Line #"<<lineno<<" in the cfg file does not match any known grammar"<<std::endl;
         exit(-1);
  }
-
 
 
