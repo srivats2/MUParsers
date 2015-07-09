@@ -6,7 +6,7 @@
 #include "RPcustomLOFTconfigparser.hxx"
 #include "keyvaluepair.hxx"
 #include<ctime>
-#include<cstring>
+#include<string>
 
 struct loft_config_data{
 

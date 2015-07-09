@@ -113,7 +113,6 @@ MUTracker_body_line:
     COMMENT {;}
     |string_section DOT_DETECT string_section EQUAL MY_FLOAT MY_SEMIC {MUTracker_param_list_numbers= new keyvaluePair<float>;
     MUTracker_param_list_numbers->key = MUTracker_temp_string;
-    std::cout<<MUTracker_temp_string<<std::endl;
     MUTracker_param_list_numbers->value=$5;
     MUTracker_list_number_params.push_back(MUTracker_param_list_numbers);
     }
