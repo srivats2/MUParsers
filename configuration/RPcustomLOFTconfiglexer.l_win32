@@ -4,7 +4,6 @@
 %{
 #include <iostream>
 #include "RPcustomLOFTconfigparser.hxx"
-using namespace std;
 int lineno=0;
 #define YY_DECL extern "C" int yylex()
 %}
