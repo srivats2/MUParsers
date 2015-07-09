@@ -13,13 +13,27 @@ extern "C" int yylex();
 extern "C" int yyparse();
 extern int lineno;
 extern FILE *yyin;
+/*************************************************************/
+//for the loft section
+keyvaluePair<float> *loft_param_list_numbers;
+keyvaluePair<std::string> *loft_param_list_strings;
 
-keyvaluePair<float> *param_list_numbers;
-keyvaluePair<std::string> *param_list_strings;
+std::vector<keyvaluePair<std::string>*> loft_list_string_params;
+std::vector<keyvaluePair<float>*> loft_list_number_params;
 
-std::vector<keyvaluePair<std::string>*> list_string_params;
-std::vector<keyvaluePair<float>*> list_number_params;
-std::string temp;
+std::string loft_temp_string;
+/*************************************************************/
+
+/*************************************************************/
+//for the MUTracker section
+keyvaluePair<float> *MUTracker_param_list_numbers;
+keyvaluePair<std::string> *MUTracker_param_list_strings;
+
+std::vector<keyvaluePair<std::string>*> MUTracker_list_string_params;
+std::vector<keyvaluePair<float>*> MUTracker_list_number_params;
+
+std::string MUTracker_temp_string;
+/*************************************************************/
 void yyerror(const char *s);
 extern "C" int MUconfig_parse(char*);
 extern "C" void MUconfig_parser_help(void);
@@ -50,49 +64,113 @@ extern "C" void MUconfig_parser_version(void);
 %token DOT
 %token EQUAL
 %token MY_SEMIC
+%token MUTracker
 // define the "terminal symbol" token types I'm going to use (in CAPS
 // by convention), and associate each with a field of the union:
 %token <ival> MY_INT
 %token <fval> MY_FLOAT
 %token <sval> MY_STRING
 %token <sval> MY_FILEPATH
+//we can expect one shift reduce warning because of MUConfig_lines...the section of
+//grammar that contains MUTrackerConfig or LOFTConfig or both or with comments
+//has been denoted with non-terminal symbols...this is perfectly fine and can be
+//ignored without consequence
+//this is mainly to provide total flexibility to the user while writting a config file
+//MUTracker section maybe at the beginning or at the end and any combinations in between
+//One can also entirely skip either section which is something i will need to think about
+%expect 1
+
 %%
 // the first rule defined is the highest-level rule, which in our
-// case is just the concept of a whole "loft config file":
+// case is just the concept of a whole "config file":
+
+
+MUConfig_lines:
+               MUConfig_lines MUConfig_line
+               | MUConfig_line
+;
+
+MUConfig_line:
+        comment_section
+        | MUTrackerConfig
+        | LOFTConfig
+
+;
+
+MUTrackerConfig:
+                MUTrackerheader MUTracker_body_section MUTrackerfooter
+
+;
+
+MUTracker_body_section:
+        MUTracker_body_lines
+        ;
+MUTracker_body_lines:
+        MUTracker_body_lines MUTracker_body_line
+        | MUTracker_body_line
+        ;
+MUTracker_body_line:
+    COMMENT {;}
+    |string_section DOT_DETECT string_section EQUAL MY_FLOAT MY_SEMIC {MUTracker_param_list_numbers= new keyvaluePair<float>;
+    MUTracker_param_list_numbers->key = MUTracker_temp_string;
+    std::cout<<MUTracker_temp_string<<std::endl;
+    MUTracker_param_list_numbers->value=$5;
+    MUTracker_list_number_params.push_back(MUTracker_param_list_numbers);
+    }
+    |string_section DOT_DETECT string_section EQUAL MY_FILEPATH {MUTracker_param_list_strings=new keyvaluePair<std::string>;
+    MUTracker_param_list_strings->key = MUTracker_temp_string;
+    std::string remove_annoying_characters_MUTracker = $5;
+    char annoying[] = ";"; //remember to write a for loop if you need to remove multiple characters
+    remove_annoying_characters_MUTracker.erase(std::remove(remove_annoying_characters_MUTracker.begin(), remove_annoying_characters_MUTracker.end(), annoying[0]), remove_annoying_characters_MUTracker.end());
+    MUTracker_param_list_strings->value= remove_annoying_characters_MUTracker;
+    MUTracker_list_string_params.push_back(MUTracker_param_list_strings);
+    }
+    |string_section DOT_DETECT string_section EQUAL MY_STRING MY_SEMIC {MUTracker_param_list_strings=new keyvaluePair<std::string>;
+    MUTracker_param_list_strings->key = MUTracker_temp_string;
+    MUTracker_param_list_strings->value = $5;
+    MUTracker_list_string_params.push_back(MUTracker_param_list_strings);
+    }
+
+    ;
+
+
+MUTrackerheader:
+START MUTracker {std::cout<<"FOUND MUTracker START"<<std::endl;}
+;
+MUTrackerfooter:
+END MUTracker {std::cout<<"FOUND MUTracker END"<<std::endl;}
+;
 
 LOFTConfig:
-            comment_section LOFTheader body_section LOFTfooter comment_section
-            | LOFTheader body_section LOFTfooter comment_section
-            | comment_section LOFTheader body_section LOFTfooter
-            | LOFTheader body_section LOFTfooter
+            LOFTheader loft_body_section LOFTfooter
 ;
 LOFTheader:
-START LOFT {std::cout<<"FOUND LOFT CONFIG START"<<std::endl;}
+START LOFT {;}
 ;
 LOFTfooter:
-END LOFT {std::cout<<"FOUND LOFT CONFIG END"<<std::endl;}
+END LOFT {;}
 ;
-body_section:
-        body_lines
+loft_body_section:
+        loft_body_lines
         ;
-body_lines:
-        body_lines body_line
-        | body_line
+loft_body_lines:
+        loft_body_lines loft_body_line
+        | loft_body_line
         ;
-body_line:
+loft_body_line:
     COMMENT {;}
-    |string_section DOT_DETECT string_section EQUAL MY_FLOAT MY_SEMIC {param_list_numbers= new keyvaluePair<float>;
-    param_list_numbers->key = temp;
-    param_list_numbers->value=$5;
-    list_number_params.push_back(param_list_numbers);
+    |string_section DOT_DETECT string_section EQUAL MY_FLOAT MY_SEMIC {loft_param_list_numbers= new keyvaluePair<float>;
+    loft_param_list_numbers->key = loft_temp_string;
+    loft_param_list_numbers->value=$5;
+    loft_list_number_params.push_back(loft_param_list_numbers);
     }
-    |string_section DOT_DETECT string_section EQUAL MY_FILEPATH {param_list_strings=new keyvaluePair<std::string>;
-    param_list_strings->key = temp;
-    std::string remove_annoying_characters = $5;
+    |string_section DOT_DETECT string_section EQUAL MY_FILEPATH {loft_param_list_strings=new keyvaluePair<std::string>;
+    loft_param_list_strings->key = loft_temp_string;
+    std::string remove_annoying_characters_loft = $5;
     char annoying[] = ";"; //remember to write a for loop if you need to remove multiple characters
-    remove_annoying_characters.erase(std::remove(remove_annoying_characters.begin(), remove_annoying_characters.end(), annoying[0]), remove_annoying_characters.end());
-    param_list_strings->value= remove_annoying_characters;
-    list_string_params.push_back(param_list_strings);
+    remove_annoying_characters_loft.erase(std::remove(remove_annoying_characters_loft.begin(), remove_annoying_characters_loft.end(), annoying[0]), remove_annoying_characters_loft.end());
+    loft_param_list_strings->value= remove_annoying_characters_loft;
+    loft_list_string_params.push_back(loft_param_list_strings);
     }
     ;
 
@@ -105,9 +183,9 @@ string_lines:
       ;
 string_line:
     MY_STRING {char* param;
-    param = (char *)malloc(std::strlen(temp.c_str())+1+std::strlen($1));
-    std::strcpy(param, temp.c_str());
-    std::strcat(param, $1); temp = param;}
+    param = (char *)malloc(std::strlen(loft_temp_string.c_str())+1+std::strlen($1));
+    std::strcpy(param, loft_temp_string.c_str());
+    std::strcat(param, $1); loft_temp_string = param; MUTracker_temp_string=param;}
     ;
 
 comment_section:
@@ -123,7 +201,7 @@ comment_line:
     ;
 
 DOT_DETECT:
-    DOT {temp.clear();} //ha! thats a trick to get rid of the structure name...should i be doing this? I dunno..but i could probably fix it later -- RP
+    DOT {loft_temp_string.clear(); MUTracker_temp_string.clear();} //ha! thats a trick to get rid of the structure name...should i be doing this? I dunno..but i could probably fix it later -- RP
     ;
 %%
 void MUconfig_parser_help(void){
@@ -138,7 +216,7 @@ MUconfig_parser_version();
 
 void MUconfig_parser_version(void){
 std::cout<<"MUConfig Parser was built with the help of CMake (3.2.3) and GNU GCC (5.1.0)"<<std::endl;
-std::cout<<"MUConfig Parser (v1.00.1) was written by Rengarajan Pelapur and built using GNU Flex (2.5.39) & GNU Bison (3.0.4) on ARCH LINUX 4.0.6-1-ARCH"<<std::endl;
+std::cout<<"MUConfig Parser (v1.00.1) was written by Rengarajan Pelapur and built using GNU Flex (2.5.39) & GNU Bison (3.0.4) on ARCH LINUX 4.0.7-2-ARCH"<<std::endl;
 }
 
 int MUconfig_parse(char* filename) {
@@ -162,7 +240,9 @@ int MUconfig_parse(char* filename) {
 }
 
 void yyerror(const char *s) {
-        std::cout << "LOFT config parse error! " << s << std::endl;
+        std::cout << "Config parse error! " << s << std::endl;
+        std::cout<< "Line #"<<lineno<<" in the cfg file does not match any known grammar"<<std::endl;
+        exit(-1);
  }
 
 

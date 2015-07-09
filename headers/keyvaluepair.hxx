@@ -4,7 +4,6 @@ template <typename T>
 struct keyvaluePair{
 std::string key;
 T value;
-keyvaluePair *next;
 };
 #endif // KEYVALUEPAIR_HXX
 
