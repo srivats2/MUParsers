@@ -7,6 +7,7 @@
 #include "keyvaluepair.hxx"
 #include<ctime>
 #include<string>
+#include<cstring>
 
 struct loft_config_data{
 
