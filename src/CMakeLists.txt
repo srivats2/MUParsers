@@ -115,7 +115,7 @@ SET(MU_SOURCE ${MU_SOURCE} main.cxx MUConfig_parser.cxx)
 if(BISON_FOUND AND FLEX_FOUND)
 add_executable (LOFTConfigParser ${BISON_LOFTConfigParser_OUTPUTS} ${FLEX_LOFTConfigScanner_OUTPUTS} ${MU_SOURCE} )
 else()
-add_executable(LOFTConfigParser ${MU_SOURCE} ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.cxx RPcustomLOFTconfiglexer.cxx)
+add_executable(LOFTConfigParser ${MU_SOURCE} ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.cxx ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfiglexer.cxx)
 endif()
 target_link_libraries(LOFTConfigParser ${SYSTEM_LIBS} )
 
