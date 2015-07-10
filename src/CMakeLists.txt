@@ -52,8 +52,10 @@ FIND_PACKAGE(FLEX)
 
 if(UNIX)
 configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomLOFTconfiglexer.l_unix ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfiglexer.l)
+configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomLOFTconfigparser.y_unix ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.y)
 else(WIN32)
 configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomLOFTconfiglexer.l_win32 ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfiglexer.l)
+configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomLOFTconfigparser.y_win32 ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.y)
 endif()
 
 
@@ -63,10 +65,10 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 #if you do not have flex and bison installed then the slower nonunistd version will be used to parse files
 #I have assumed that if you do not have Bison and Flex then you are on a non *nix system and hence this parser will be slower..only way to ensure full compatibility of types
 if(BISON_FOUND AND FLEX_FOUND)
-BISON_TARGET(LOFTConfigParser RPcustomLOFTconfigparser.y ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.cxx)
+BISON_TARGET(LOFTConfigParser ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.y ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.cxx)
 FLEX_TARGET(LOFTConfigScanner ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfiglexer.l ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfiglexer.cxx)
 ADD_FLEX_BISON_DEPENDENCY(LOFTConfigScanner LOFTConfigParser)
-SET(MU_SOURCE ${MU_SOURCE} RPcustomLOFTconfiglexer.l RPcustomLOFTconfigparser.y)
+SET(MU_SOURCE ${MU_SOURCE} ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfiglexer.l ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfigparser.y)
 else()
 MESSAGE("FLEX and BISON paths must be set to compile the system optimized parser..else the slower pre-compiled headers will be used")
 configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomLOFTconfiglexer.cxx_config.in ${CMAKE_CURRENT_BINARY_DIR}/RPcustomLOFTconfiglexer.cxx)

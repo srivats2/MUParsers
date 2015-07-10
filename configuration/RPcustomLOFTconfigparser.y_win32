@@ -1,4 +1,4 @@
-%define api.prefix{MUConfig}
+%define api.prefix "MUConfig"
 %{
 #include<cstdio>
 #include<iostream>
