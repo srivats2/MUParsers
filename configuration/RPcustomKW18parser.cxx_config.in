@@ -90,8 +90,12 @@ std::vector<int> my_kw18_data_oid;
 void KW18readererror(const char *s);
 extern "C" int kw18_parse(char*);
 
+extern "C" void KW18_parser_help(void);
+extern "C" void KW18_parser_version(void);
+
+
 /* Line 371 of yacc.c  */
-#line 95 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
+#line 99 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -147,7 +151,7 @@ extern int KW18readerdebug;
 typedef union KW18READERSTYPE
 {
 /* Line 387 of yacc.c  */
-#line 30 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
+#line 34 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
 
         int ival;
         float fval;
@@ -155,7 +159,7 @@ typedef union KW18READERSTYPE
 
 
 /* Line 387 of yacc.c  */
-#line 159 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
+#line 163 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
 } KW18READERSTYPE;
 # define KW18READERSTYPE_IS_TRIVIAL 1
 # define KW18readerstype KW18READERSTYPE /* obsolescent; will be withdrawn */
@@ -183,7 +187,7 @@ int KW18readerparse ();
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 187 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
+#line 191 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
 
 #ifdef short
 # undef short
@@ -473,7 +477,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    51,    51,    51,    51,    54,    57,    60,    61,    64
+       0,    55,    55,    55,    55,    58,    61,    64,    65,    68
 };
 #endif
 
@@ -1373,25 +1377,25 @@ yyreduce:
     {
         case 4:
 /* Line 1792 of yacc.c  */
-#line 51 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
+#line 55 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
     { cout << "done with a kw18 file (# of lines : "<<kw18_lineno<<" )" << endl; }
     break;
 
   case 5:
 /* Line 1792 of yacc.c  */
-#line 54 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
+#line 58 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
     { }
     break;
 
   case 9:
 /* Line 1792 of yacc.c  */
-#line 64 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
+#line 68 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
     {  my_kw18_data_x.push_back((yyvsp[(8) - (20)].ival));my_kw18_data_y.push_back((yyvsp[(9) - (20)].ival)); my_kw18_data_frno.push_back((yyvsp[(3) - (20)].ival)); my_kw18_data_oid.push_back((yyvsp[(1) - (20)].ival)); }
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1395 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
+#line 1399 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1623,9 +1627,20 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 67 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
+#line 71 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
 
+void KW18_parser_help(void){
+std::cout<<"--------------------------------------------------------------------------------------------------------------------------------------------"<<std::endl;
+std::cout<<"KW18 Parser is used to parse Kitware's KW18 file format for use in tracking"<<std::endl;
+std::cout<<"Please make sure that the file has the correct format..Grammar for the file is very strictly enforced as it should contain GT/analysis results"<<std::endl;
+KW18_parser_version();
+std::cout<<"--------------------------------------------------------------------------------------------------------------------------------------------"<<std::endl;
+}
 
+void KW18_parser_version(void){
+std::cout<<"MU's KW18Parser was built with the help of CMake (3.2.3) and GNU GCC (5.1.0)"<<std::endl;
+std::cout<<"MU's KW18Parser (v2.00.3) was written by Rengarajan Pelapur and built using Flex (2.5.39) & GNU Bison (3.0.4) on ARCH LINUX 4.0.7-2-ARCH"<<std::endl;
+}
 int kw18_parse(char* filename) {
             //int main(int argc, char* argv[]){
                     // open a file handle to a particular file:

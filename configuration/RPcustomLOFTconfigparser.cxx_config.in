@@ -1489,13 +1489,13 @@ yyreduce:
   case 15:
 /* Line 1792 of yacc.c  */
 #line 140 "C:/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.y"
-    {std::cout<<"FOUND MUTracker START"<<std::endl;}
+    {;}
     break;
 
   case 16:
 /* Line 1792 of yacc.c  */
 #line 143 "C:/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.y"
-    {std::cout<<"FOUND MUTracker END"<<std::endl;}
+    {;}
     break;
 
   case 18:
@@ -1791,6 +1791,7 @@ yyreturn:
 #line 208 "C:/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.y"
 
 void MUconfig_parser_help(void){
+    std::cout<<"--------------------------------------------------------------------------------------------------------------------------------------------"<<std::endl;
 std::cout<<"MU Config Parser is used to parse University of Missouri's tracker config files such as for LOFT & CSURF"<<std::endl;
 std::cout<<"Please make sure that the config file has the correct format..Grammar for the file is somewhat strictly enforced"<<std::endl;
 std::cout<<"COMMENTS: Any number of lines of comments can be added on top or below the actual config content"<<std::endl;
@@ -1798,6 +1799,7 @@ std::cout<<"COMMENTS (contd.) : Comments need to be prefixed with CXX standard '
 std::cout<<"CONFIG Params: Config params are always enclosed within 'begin something_config' & 'end something_config'"<<std::endl;
 std::cout<<"CONFIG Params (contd.) : This 'something' can be loft or csurf or MUTracker and is case sensitive"<<std::endl;
 MUconfig_parser_version();
+std::cout<<"--------------------------------------------------------------------------------------------------------------------------------------------"<<std::endl;
 }
 
 void MUconfig_parser_version(void){
