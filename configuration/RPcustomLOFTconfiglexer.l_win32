@@ -1,0 +1,34 @@
+%option noyywrap
+%option nounistd
+%option never-interactive
+%option prefix="MUConfig"
+%{
+#include <iostream>
+#include "RPcustomLOFTconfigparser.hxx"
+int config_lineno=0;
+#define YY_DECL extern "C" int MUConfiglex()
+%}
+%%
+[\t] ;
+start {return START;}
+loft_config {return LOFT;}
+MUTracker_config {return MUTracker;}
+end {return END;}
+\#.*|\/\/.* {return COMMENT; }
+\n              {++config_lineno;}
+-[0-9]+|-[0-9]+\.[0-9]+|[0-9]+\.[0-9]+|[0-9]+|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+) { MUConfiglval.fval = atof(MUConfigtext);return MY_FLOAT; }
+[a-zA-Z0-9]+|_ {MUConfiglval.sval = strdup(MUConfigtext); return MY_STRING; }
+\. {return DOT;}
+\= {return EQUAL;}
+([\/]+[\w]*).* {MUConfiglval.sval=strdup(MUConfigtext); return MY_FILEPATH;}
+([a-zA-Z]+\:).* {MUConfiglval.sval=strdup(MUConfigtext);  return MY_FILEPATH;}
+\; {return MY_SEMIC;}
+.    {;}
+%%
+
+
+
+
+
+
+
