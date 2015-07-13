@@ -11,10 +11,10 @@
 #include "keyvaluepair.hxx"
 // stuff from flex that bison needs to know about:
 
-extern "C" int yylex();
-extern "C" int yyparse();
-extern int lineno;
-extern FILE *yyin;
+extern "C" int MUConfiglex();
+extern "C" int MUConfigparse();
+extern int config_lineno;
+extern FILE *MUConfigin;
 /*************************************************************/
 //for the loft section
 keyvaluePair<float> *loft_param_list_numbers;
@@ -36,7 +36,7 @@ std::vector<keyvaluePair<float>*> MUTracker_list_number_params;
 
 std::string MUTracker_temp_string;
 /*************************************************************/
-void yyerror(const char *s);
+void MUConfigerror(const char *s);
 extern "C" int MUconfig_parse(char*);
 extern "C" void MUconfig_parser_help(void);
 extern "C" void MUconfig_parser_version(void);
@@ -218,7 +218,7 @@ MUconfig_parser_version();
 
 void MUconfig_parser_version(void){
 std::cout<<"MUConfig Parser was built with the help of CMake (3.2.3) and GNU GCC (5.1.0)"<<std::endl;
-std::cout<<"MUConfig Parser (v1.00.1) was written by Rengarajan Pelapur and built using GNU Flex (2.5.39) & GNU Bison (3.0.4) on ARCH LINUX 4.0.7-2-ARCH"<<std::endl;
+std::cout<<"MUConfig Parser (v1.00.1) was written by Rengarajan Pelapur and built using Flex (2.5.39) & GNU Bison (3.0.4) on ARCH LINUX 4.0.7-2-ARCH"<<std::endl;
 }
 
 int MUconfig_parse(char* filename) {
@@ -231,19 +231,19 @@ int MUconfig_parse(char* filename) {
                             return -1;
                     }
                     // set flex to read from it instead of defaulting to STDIN:
-                    yyin = myfile;
+                    MUConfigin = myfile;
 
                     // parse through the input until there is no more:
                     do {
-                            yyparse();
-                    } while (!feof(yyin));
-                    std::cout << "done with a config file (# of lines : "<<lineno<<" )" << std::endl;
+                            MUConfigparse();
+                    } while (!feof(MUConfigin));
+                    std::cout << "done with a config file (# of lines : "<<config_lineno<<" )" << std::endl;
 
 }
 
-void yyerror(const char *s) {
+void MUConfigerror(const char *s) {
         std::cout << "Config parse error! " << s << std::endl;
-        std::cout<< "Line #"<<lineno<<" in the cfg file does not match any known grammar"<<std::endl;
+        std::cout<< "Line #"<<config_lineno<<" in the cfg file does not match any known grammar"<<std::endl;
         exit(-1);
  }
 

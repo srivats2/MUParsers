@@ -14,7 +14,7 @@ std::vector<int> my_kw18_data_y;
 std::vector<int> my_kw18_data_frno;
 std::vector<int> my_kw18_data_oid;
 
-void yyerror(const char *s);
+void KW18readererror(const char *s);
 extern "C" int kw18_parse(char*);
 %}
 
@@ -86,7 +86,7 @@ int kw18_parse(char* filename) {
 
 }
 
-void yyerror(const char *s) {
+void KW18readererror(const char *s) {
         cout << "KW18 parse error! " << s << endl;
         exit(-1);
 }

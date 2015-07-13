@@ -36,7 +36,7 @@ std::vector<keyvaluePair<float>*> MUTracker_list_number_params;
 
 std::string MUTracker_temp_string;
 /*************************************************************/
-void yyerror(const char *s);
+void MUConfigerror(const char *s);
 extern "C" int MUconfig_parse(char*);
 extern "C" void MUconfig_parser_help(void);
 extern "C" void MUconfig_parser_version(void);
@@ -241,7 +241,7 @@ int MUconfig_parse(char* filename) {
 
 }
 
-void yyerror(const char *s) {
+void MUConfigerror(const char *s) {
         std::cout << "Config parse error! " << s << std::endl;
         std::cout<< "Line #"<<config_lineno<<" in the cfg file does not match any known grammar"<<std::endl;
         exit(-1);
