@@ -5,8 +5,8 @@
 #include<vector>
 using namespace std;
 // stuff from flex that bison needs to know about:
-extern "C" int yylex();
-extern "C" int yyparse();
+extern "C" int KW18readerlex();
+extern "C" int KW18readerparse();
 extern int kw18_lineno;
 extern FILE *KW18readerin;
 std::vector<int> my_kw18_data_x;
@@ -80,8 +80,8 @@ int kw18_parse(char* filename) {
 
                     // parse through the input until there is no more:
                     do {
-                            yyparse();
-                    } while (!feof(yyin));
+                            KW18readerparse();
+                    } while (!feof(KW18readerin));
                     cout << "done with a kw18 file (# of lines : "<<kw18_lineno<<" )" << endl;
 
 }
