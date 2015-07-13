@@ -71,27 +71,27 @@
 
 /* Copy the first part of user declarations.  */
 /* Line 371 of yacc.c  */
-#line 2 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.y"
+#line 2 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
 
 #include<cstdio>
 #include<iostream>
 #include<vector>
 using namespace std;
 // stuff from flex that bison needs to know about:
-extern "C" int yylex();
-extern "C" int yyparse();
-extern int lineno;
-extern FILE *yyin;
+extern "C" int KW18readerlex();
+extern "C" int KW18readerparse();
+extern int kw18_lineno;
+extern FILE *KW18readerin;
 std::vector<int> my_kw18_data_x;
 std::vector<int> my_kw18_data_y;
 std::vector<int> my_kw18_data_frno;
 std::vector<int> my_kw18_data_oid;
 
-void yyerror(const char *s);
+void KW18readererror(const char *s);
 extern "C" int kw18_parse(char*);
 
 /* Line 371 of yacc.c  */
-#line 95 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.cxx"
+#line 95 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -111,8 +111,8 @@ extern "C" int kw18_parse(char*);
 
 /* In a future release of Bison, this section will be replaced
    by #include "RPcustomKW18parser.hxx".  */
-#ifndef YY_KW18READER_C_CODE_FLEX_BISON_KW18_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
-# define YY_KW18READER_C_CODE_FLEX_BISON_KW18_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
+#ifndef YY_KW18READER_C_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
+# define YY_KW18READER_C_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
 /* Enabling traces.  */
 #ifndef KW18READERDEBUG
 # if defined YYDEBUG
@@ -147,7 +147,7 @@ extern int KW18readerdebug;
 typedef union KW18READERSTYPE
 {
 /* Line 387 of yacc.c  */
-#line 30 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.y"
+#line 30 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
 
         int ival;
         float fval;
@@ -155,7 +155,7 @@ typedef union KW18READERSTYPE
 
 
 /* Line 387 of yacc.c  */
-#line 159 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.cxx"
+#line 159 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
 } KW18READERSTYPE;
 # define KW18READERSTYPE_IS_TRIVIAL 1
 # define KW18readerstype KW18READERSTYPE /* obsolescent; will be withdrawn */
@@ -178,12 +178,12 @@ int KW18readerparse ();
 #endif
 #endif /* ! YYPARSE_PARAM */
 
-#endif /* !YY_KW18READER_C_CODE_FLEX_BISON_KW18_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED  */
+#endif /* !YY_KW18READER_C_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 187 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.cxx"
+#line 187 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
 
 #ifdef short
 # undef short
@@ -1373,25 +1373,25 @@ yyreduce:
     {
         case 4:
 /* Line 1792 of yacc.c  */
-#line 51 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.y"
-    { cout << "done with a kw18 file (# of lines : "<<lineno<<" )" << endl; }
+#line 51 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
+    { cout << "done with a kw18 file (# of lines : "<<kw18_lineno<<" )" << endl; }
     break;
 
   case 5:
 /* Line 1792 of yacc.c  */
-#line 54 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.y"
+#line 54 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
     { }
     break;
 
   case 9:
 /* Line 1792 of yacc.c  */
-#line 64 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.y"
+#line 64 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
     {  my_kw18_data_x.push_back((yyvsp[(8) - (20)].ival));my_kw18_data_y.push_back((yyvsp[(9) - (20)].ival)); my_kw18_data_frno.push_back((yyvsp[(3) - (20)].ival)); my_kw18_data_oid.push_back((yyvsp[(1) - (20)].ival)); }
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1395 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.cxx"
+#line 1395 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.cxx"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1623,7 +1623,7 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 67 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.y"
+#line 67 "C:/code/loft_config_parsing/build/src/RPcustomKW18parser.y"
 
 
 int kw18_parse(char* filename) {
@@ -1636,17 +1636,17 @@ int kw18_parse(char* filename) {
                             return -1;
                     }
                     // set flex to read from it instead of defaulting to STDIN:
-                    yyin = myfile;
+                    KW18readerin = myfile;
 
                     // parse through the input until there is no more:
                     do {
-                            yyparse();
-                    } while (!feof(yyin));
-                    cout << "done with a kw18 file (# of lines : "<<lineno<<" )" << endl;
+                            KW18readerparse();
+                    } while (!feof(KW18readerin));
+                    cout << "done with a kw18 file (# of lines : "<<kw18_lineno<<" )" << endl;
 
 }
 
-void yyerror(const char *s) {
+void KW18readererror(const char *s) {
         cout << "KW18 parse error! " << s << endl;
         exit(-1);
 }

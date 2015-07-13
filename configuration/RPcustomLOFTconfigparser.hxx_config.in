@@ -1,19 +1,19 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 2.7.  */
 
 /* Bison interface for Yacc-like parsers in C
-
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
-
+   
+      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
+   
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-
+   
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-
+   
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,16 +26,16 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-
+   
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
-# define YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
-/* Debug traces.  */
+#ifndef YY_MUCONFIG_C_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
+# define YY_MUCONFIG_C_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED
+/* Enabling traces.  */
 #ifndef MUCONFIGDEBUG
 # if defined YYDEBUG
-#if YYDEBUG
+#  if YYDEBUG
 #   define MUCONFIGDEBUG 1
 #  else
 #   define MUCONFIGDEBUG 0
@@ -48,49 +48,62 @@
 extern int MUConfigdebug;
 #endif
 
-/* Token type.  */
+/* Tokens.  */
 #ifndef MUCONFIGTOKENTYPE
 # define MUCONFIGTOKENTYPE
-  enum MUConfigtokentype
-  {
-    COMMENT = 258,
-    LOFT = 259,
-    START = 260,
-    END = 261,
-    ENDL = 262,
-    DOT = 263,
-    EQUAL = 264,
-    MY_SEMIC = 265,
-    MUTracker = 266,
-    MY_INT = 267,
-    MY_FLOAT = 268,
-    MY_STRING = 269,
-    MY_FILEPATH = 270
-  };
+   /* Put the tokens into the symbol table, so that GDB and other debuggers
+      know about them.  */
+   enum MUConfigtokentype {
+     COMMENT = 258,
+     LOFT = 259,
+     START = 260,
+     END = 261,
+     ENDL = 262,
+     DOT = 263,
+     EQUAL = 264,
+     MY_SEMIC = 265,
+     MUTracker = 266,
+     MY_INT = 267,
+     MY_FLOAT = 268,
+     MY_STRING = 269,
+     MY_FILEPATH = 270
+   };
 #endif
 
-/* Value type.  */
-#if ! defined MUCONFIGSTYPE && ! defined MUCONFIGSTYPE_IS_DECLARED
 
-union MUCONFIGSTYPE
+#if ! defined MUCONFIGSTYPE && ! defined MUCONFIGSTYPE_IS_DECLARED
+typedef union MUCONFIGSTYPE
 {
-#line 55 "RPcustomLOFTconfigparser.y" /* yacc.c:1909  */
+/* Line 2058 of yacc.c  */
+#line 55 "C:/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.y"
 
         int ival;
         float fval;
         char *sval;
 
-#line 84 "/home/srivats/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.hxx" /* yacc.c:1909  */
-};
 
-typedef union MUCONFIGSTYPE MUCONFIGSTYPE;
+/* Line 2058 of yacc.c  */
+#line 87 "C:/code/loft_config_parsing/build/src/RPcustomLOFTconfigparser.hxx"
+} MUCONFIGSTYPE;
 # define MUCONFIGSTYPE_IS_TRIVIAL 1
+# define MUConfigstype MUCONFIGSTYPE /* obsolescent; will be withdrawn */
 # define MUCONFIGSTYPE_IS_DECLARED 1
 #endif
 
-
 extern MUCONFIGSTYPE MUConfiglval;
 
+#ifdef YYPARSE_PARAM
+#if defined __STDC__ || defined __cplusplus
+int MUConfigparse (void *YYPARSE_PARAM);
+#else
+int MUConfigparse ();
+#endif
+#else /* ! YYPARSE_PARAM */
+#if defined __STDC__ || defined __cplusplus
 int MUConfigparse (void);
+#else
+int MUConfigparse ();
+#endif
+#endif /* ! YYPARSE_PARAM */
 
-#endif /* !YY_MUCONFIG_HOME_SRIVATS_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED  */
+#endif /* !YY_MUCONFIG_C_CODE_LOFT_CONFIG_PARSING_BUILD_SRC_RPCUSTOMLOFTCONFIGPARSER_HXX_INCLUDED  */
