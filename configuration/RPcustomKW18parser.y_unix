@@ -16,6 +16,10 @@ std::vector<int> my_kw18_data_oid;
 
 void KW18readererror(const char *s);
 extern "C" int kw18_parse(char*);
+
+extern "C" void KW18_parser_help(void);
+extern "C" void KW18_parser_version(void);
+
 %}
 
 
@@ -65,7 +69,18 @@ header:
             ;
 
 %%
+void KW18_parser_help(void){
+std::cout<<"--------------------------------------------------------------------------------------------------------------------------------------------"<<std::endl;
+std::cout<<"KW18 Parser is used to parse Kitware's KW18 file format for use in tracking"<<std::endl;
+std::cout<<"Please make sure that the file has the correct format..Grammar for the file is very strictly enforced as it should contain GT/analysis results"<<std::endl;
+KW18_parser_version();
+std::cout<<"--------------------------------------------------------------------------------------------------------------------------------------------"<<std::endl;
+}
 
+void KW18_parser_version(void){
+std::cout<<"MU's KW18Parser was built with the help of CMake (3.2.3) and GNU GCC (5.1.0)"<<std::endl;
+std::cout<<"MU's KW18Parser (v2.00.3) was written by Rengarajan Pelapur and built using Flex (2.5.39) & GNU Bison (3.0.4) on ARCH LINUX 4.0.7-2-ARCH"<<std::endl;
+}
 int kw18_parse(char* filename) {
             //int main(int argc, char* argv[]){
                     // open a file handle to a particular file:
