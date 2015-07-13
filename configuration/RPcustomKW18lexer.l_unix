@@ -1,14 +1,15 @@
 %option noyywrap
+%option prefix="KW18reader"
 %{
 #include <iostream>
 #include "RPcustomKW18parser.hxx"
 using namespace std;
-int lineno=0;
+int kw18_lineno=0;
 #define YY_DECL extern "C" int KW18readerlex()
 %}
 %%
 \#.*             {KW18readerlval.sval=strdup(yytext);return COMMENT; }
-\n              {++lineno;}
+\n              {++kw18_lineno;}
 -[0-9]+|-[0-9]+\.[0-9]+|[0-9]+\.[0-9]+|[0-9]+|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+) { KW18readerlval.ival = atoi(yytext);return MY_INT; }
 [a-zA-Z0-9]+|#+   {
     // we have to copy because we can't rely on yytext not changing:

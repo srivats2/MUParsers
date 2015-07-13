@@ -7,8 +7,8 @@ using namespace std;
 // stuff from flex that bison needs to know about:
 extern "C" int yylex();
 extern "C" int yyparse();
-extern int lineno;
-extern FILE *yyin;
+extern int kw18_lineno;
+extern FILE *KW18readerin;
 std::vector<int> my_kw18_data_x;
 std::vector<int> my_kw18_data_y;
 std::vector<int> my_kw18_data_frno;
@@ -34,7 +34,7 @@ extern "C" int kw18_parse(char*);
 }
 
 // define the constant-string tokens:
-//cout << "Line #:"<<lineno<<"\t\t" << $1 <<"\t" << $2 <<"\t" <<  $3 <<"\t" << $4 <<"\t" << $5 <<"\t" << $6 <<"\t" << $7 <<"\t" << $8 <<"\t" << $9 <<"\t" << $10 <<"\t" << $11 <<"\t" << $12 <<"\t" <<  $13 <<"\t" << $14 <<"\t" << $15 <<"\t" << $16 <<"\t" << $17 <<"\t" << $18 <<"\t" << $19 <<"\t" << $20<< endl;
+//cout << "Line #:"<<kw18_lineno<<"\t\t" << $1 <<"\t" << $2 <<"\t" <<  $3 <<"\t" << $4 <<"\t" << $5 <<"\t" << $6 <<"\t" << $7 <<"\t" << $8 <<"\t" << $9 <<"\t" << $10 <<"\t" << $11 <<"\t" << $12 <<"\t" <<  $13 <<"\t" << $14 <<"\t" << $15 <<"\t" << $16 <<"\t" << $17 <<"\t" << $18 <<"\t" << $19 <<"\t" << $20<< endl;
 %token <sval> COMMENT
 
 
@@ -48,7 +48,7 @@ extern "C" int kw18_parse(char*);
 // the first rule defined is the highest-level rule, which in our
 // case is just the concept of a whole "kw18 file":
 kw18:
-        header body_section | header | body_section { cout << "done with a kw18 file (# of lines : "<<lineno<<" )" << endl; }
+        header body_section | header | body_section { cout << "done with a kw18 file (# of lines : "<<kw18_lineno<<" )" << endl; }
         ;
 header:
         COMMENT { }//cout << "Reading a KW18 commented line : " << $1 << endl; }
@@ -76,13 +76,13 @@ int kw18_parse(char* filename) {
                             return -1;
                     }
                     // set flex to read from it instead of defaulting to STDIN:
-                    yyin = myfile;
+                    KW18readerin = myfile;
 
                     // parse through the input until there is no more:
                     do {
                             yyparse();
                     } while (!feof(yyin));
-                    cout << "done with a kw18 file (# of lines : "<<lineno<<" )" << endl;
+                    cout << "done with a kw18 file (# of lines : "<<kw18_lineno<<" )" << endl;
 
 }
 
