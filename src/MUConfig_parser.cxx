@@ -30,8 +30,8 @@ int MUConfig_parser::match_populate_config(std::vector<keyvaluePair<float>*> &li
         valid_match=this->compare_datamember_key(comp,(*it)->key);
         if(valid_match){
                 char* paramval;
-                paramval = (char *)malloc(std::strlen((*it)->key.c_str())+1);
-                std::strcpy(paramval, (*it)->key.c_str());
+                paramval = (char *)malloc(std::strlen((*it)->value.c_str())+1);
+                std::strcpy(paramval, (*it)->value.c_str());
                 m1.inputpath_frames = paramval;
             if(show_sstream_out){
                 std::cout<<"Parameter "<<comp<<" was set as "<<(*it)->value<<std::endl;
@@ -42,8 +42,8 @@ int MUConfig_parser::match_populate_config(std::vector<keyvaluePair<float>*> &li
         valid_match=this->compare_datamember_key(comp,(*it)->key);
         if(valid_match){
                 char* paramval;
-                paramval = (char *)malloc(std::strlen((*it)->key.c_str())+1);
-                std::strcpy(paramval, (*it)->key.c_str());
+                paramval = (char *)malloc(std::strlen((*it)->value.c_str())+1);
+                std::strcpy(paramval, (*it)->value.c_str());
                 m1.wildcard = paramval;
             if(show_sstream_out){
                 std::cout<<"Parameter "<<comp<<" was set as "<<(*it)->value<<std::endl;
